@@ -26,3 +26,4 @@ if __name__ == "__main__":
         loop.train(epoch)
         loop.test(epoch)
         visualize_stn(model=model, test_loader=test_loader, idx=epoch)  # 可视化展示STN前后的图，结果保存在visual/文件夹下
+    loop.show() # 绘制Test Acc变化曲线，保存到result.jpg

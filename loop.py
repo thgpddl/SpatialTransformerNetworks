@@ -1,4 +1,5 @@
 import torch
+import matplotlib.pyplot as plt
 
 
 class Loop:
@@ -9,6 +10,7 @@ class Loop:
         self.loss_fn = loss_fn
         self.optimizer = optimizer
         self.device = device
+        self.test_acc = []
 
     def train(self, epoch):
         self.model.train()
@@ -44,3 +46,11 @@ class Loop:
             print('Test Epoch:{} Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'
                   .format(epoch, test_loss, correct, len(self.test_loader.dataset),
                           100. * correct / len(self.test_loader.dataset)))
+            self.test_acc.append(100. * correct / len(self.test_loader.dataset))
+
+    def show(self):
+        x = range(1, self.test_acc.__len__() + 1)
+        plt.figure()
+        plt.title('Test Acc')
+        plt.plot(x, self.test_acc)
+        plt.savefig("./result.jpg")
